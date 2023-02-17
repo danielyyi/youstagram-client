@@ -65,7 +65,9 @@ function MakePost(props) {
 
   const [image, setImage] = useState('');
   function changeImage(image){
-    resizeImage(image, 400, 400).then((result) => values.image = result ,  setImage(result));
+    const resizedImage = resizeImage(image, 400, 400);
+    values.image = resizedImage;
+    setImage(resizedImage)
   }
 
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
