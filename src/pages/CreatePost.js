@@ -32,7 +32,7 @@ function MakePost(props) {
     setColor(color);
   }
 
-  function resizeImage(base64Str, maxWidth = 200, maxHeight = 200) {
+  function resizeImage(base64Str, maxWidth = 400, maxHeight = 350) {
     return new Promise((resolve) => {
       let img = new Image()
       img.src = base64Str
@@ -65,9 +65,8 @@ function MakePost(props) {
 
   const [image, setImage] = useState('');
   function changeImage(image){
-    values.image = image;
-
-    resizeImage(image, 200, 200).then((result) => setImage(result));
+    resizeImage(image, 400, 400).then((result) => values.image = result);
+    setImage(values.image);
   }
 
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
