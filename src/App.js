@@ -14,10 +14,11 @@ import NoProfile from "./pages/NoProfile";
 import CreatePost from "./pages/CreatePost";
 import SinglePost from './pages/SinglePost';
 import SingleUser from './pages/SingleUser';
+import { HashRouter } from 'react-router-dom';
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <HashRouter>
         <Route exact path="/search" component={Search} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/posts/:postId" component={SinglePost}/>
@@ -27,7 +28,7 @@ function App() {
         <Route exact path="/noprofile" component={NoProfile} />
         <Route exact path="/register" component={Register} />
         <AuthRoute exact path="/createpost" component={CreatePost} />
-      </Router>
+      </HashRouter>
     </AuthProvider>
   );
 }
