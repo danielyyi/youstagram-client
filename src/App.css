@@ -57,6 +57,7 @@ a {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  overflow: hidden;
 }
 .fake-headerbar {
   width: 100%;
@@ -67,10 +68,11 @@ a {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  overflow: hidden;
 }
 .current-posts{
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: visible;
   /*scroll-snap-type: y proximity;*/
 }
 .post-holder {

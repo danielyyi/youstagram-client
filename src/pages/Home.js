@@ -9,10 +9,7 @@ import {FETCH_POSTS_QUERY} from '../util/graphql'
 
 function Home() {
     const {loading, data} = useQuery(FETCH_POSTS_QUERY);
-    var posts = {};
-    if(!loading){
-        posts = data.getPosts
-    }
+    var posts = !loading && data && data.getPosts ? data.getPosts : [];
       
   return (
     <div>

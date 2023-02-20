@@ -28,3 +28,23 @@ export const FETCH_POSTS_QUERY = gql`
     }
   }
 `;
+
+export const FETCH_LIMITED_POSTS_QUERY = gql`
+  {
+    getLimitedPosts (offset:0, limit:3){
+      id
+      caption
+      image
+      color
+      createdAt
+      username
+      commentCount
+      comments {
+        id
+        username
+        createdAt
+        body
+      }
+    }
+  }
+`;

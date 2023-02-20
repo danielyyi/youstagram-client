@@ -6,7 +6,8 @@ import {setContext} from 'apollo-link-context';
 
 
 const httpLink = createHttpLink({
-    uri: 'https://youstagram-backend.onrender.com'
+    //uri: 'https://youstagram-backend.onrender.com'
+    uri: 'http://localhost:5000/graphql'
 })
 
 const authLink = setContext(() => {
