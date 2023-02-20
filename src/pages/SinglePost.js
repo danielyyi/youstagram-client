@@ -30,8 +30,7 @@ function SinglePost(props) {
   //THE SCREEN REFRESHES WHEN POSTING A COMMENT. THIS CAN BE REMOVED BY NOT WRAPPING IT IN A FORM BUT THEN U CANT USE ENTER BUTTON ON KEYBOARD
   const[submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
     
-    update(event){
-      event.preventDefault()
+    update(){
       setComment("");
       document.getElementById("commentInput").value = "";
     },
@@ -106,10 +105,10 @@ function deletePostCallback(){
               ))}
               {user ? (<div>
                       <p>Post a Comment</p>
-                      <form>
+                      
                       <input type="text" maxLength="50" size="10" id="commentInput" onChange={event => setComment(event.target.value)}/>
                       <button disabled={comment.trim() === ''} onClick={submitComment}>Submit</button>
-                      </form>
+                      
                     </div>) : (<div>You must be logged in to comment</div>)}
              
             </div>
