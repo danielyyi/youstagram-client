@@ -178,8 +178,33 @@ a {
     flex-direction: column;
   }
 
-
-
+  .profile-other-headerbar {
+   
+    
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    text-align: left;
+    font-size: 30px;
+    background-color: rgb(27, 27, 27);
+    
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.397);
+    height: 15vh;
+    display: flex;
+    font-size: 20px;
+    flex-direction: column;
+  }
+  .fake-other-profile-headerbar {
+    width: 100%;
+    text-align: left;
+    font-size: 30px;
+    background-color: rgb(27, 27, 27);
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    
+  }
 
 
   .fake-profile-headerbar {

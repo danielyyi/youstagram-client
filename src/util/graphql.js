@@ -30,4 +30,38 @@ export const FETCH_POSTS_QUERY = gql`
   }
 `;
 
+export const FETCH_USER_POSTS_QUERY = gql`
+query ($username: String!) {
+  getPostsByUser(username: $username) {
+    caption
+    color
+    commentCount
+    comments {
+      body
+      createdAt
+      id
+      username
+    }
+    createdAt
+    id
+    image
+    username
+  }
+}
+`;
+
+export const FETCH_USER_QUERY = gql`
+  query ($username: String!) {
+    searchUser(username: $username) {
+    bio
+    createdAt
+    email
+    id
+    username
+    
+    }
+  }
+`;
+
+
 
