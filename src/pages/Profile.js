@@ -18,8 +18,8 @@ function Profile() {
 
   return (
     <div className="profile-page">
-      <ProfileHeaderbar />
-      <div className="fake-profile-headerbar"></div>
+      <ProfileHeaderbar/>
+      <div className="fake-other-profile-headerbar"></div>
       <div className="current-posts">
       {loading ? (
         <h3>Loading...</h3>

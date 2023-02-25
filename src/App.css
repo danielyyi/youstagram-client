@@ -23,6 +23,16 @@ body {
   background-color: rgb(27, 27, 27);
   height: 7vh;
 }
+.fake-navbar {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  width: 100%;
+
+  height: 7vh;
+}
 .logo {
   height: 35px;
   width: 37px;

@@ -14,6 +14,7 @@ import NoProfile from "./pages/NoProfile";
 import CreatePost from "./pages/CreatePost";
 import SinglePost from './pages/SinglePost';
 import SingleUser from './pages/SingleUser';
+import EditProfile from './pages/EditProfile'
 import { HashRouter } from 'react-router-dom';
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route exact path="/noprofile" component={NoProfile} />
         <Route exact path="/register" component={Register} />
         <AuthRoute exact path="/createpost" component={CreatePost} />
+        <AuthRoute exact path="/edit" component={EditProfile}/>
       </HashRouter>
     </AuthProvider>
   );
