@@ -30,4 +30,23 @@ export const FETCH_POSTS_QUERY = gql`
   }
 `;
 
+export const LOAD_POSTS_QUERY = gql`
+query LoadPosts($limit: Int!) {
+  loadPosts(limit: $limit) {
+    caption
+    color
+    commentCount
+    comments {
+      body
+      createdAt
+      id
+      username
+    }
+    createdAt
+    id
+    image
+    username
+  }
+}`
+
 

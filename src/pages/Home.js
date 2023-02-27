@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Headerbar from "../components/Headerbar";
 import Post from "../components/Post";
+import { LOAD_POSTS_QUERY } from "../util/graphql";
 
 import { useQuery, useLazyQuery, ApolloClient, InMemoryCache, makeVar} from "@apollo/client";
 
@@ -50,8 +51,12 @@ function Home() {
           </div>
         ))
       )}
+    <div>
+      {!loading ? (
+        <div className="post-holder"><button onClick={() => refetch({limit: posts.length+3})}>Load More</button></div>
+      ) : (<></>)}
+    </div>
     
-      <button onClick={() => refetch({limit: posts.length+3})}>Load More</button>
       <div style={{ height: 100 }}></div>
       </div>
       
@@ -60,6 +65,7 @@ function Home() {
     </div>
   );
 }
+/*
 const LOAD_POSTS_QUERY = gql`
 query LoadPosts($limit: Int!) {
   loadPosts(limit: $limit) {
@@ -78,6 +84,6 @@ query LoadPosts($limit: Int!) {
     username
   }
 }`
-
+*/
 
 export default Home;

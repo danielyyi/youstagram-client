@@ -375,9 +375,8 @@ a {
 .loader-holder{
   display: flex;
   justify-content: center;
-  padding-top: 60%;
+  padding-top: 250px;
   text-align: center;
-  min-height: 100vh;
 }
 .loader {
   border: 6px solid #f7f7f7; /* Light grey */

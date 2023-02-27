@@ -47,7 +47,7 @@ function deletePostCallback(){
 
   let postMarkup;
   if (!getPost) {
-    postMarkup = <p>Loading post...</p>;
+    postMarkup = <div className="loader-holder"><div className="loader"></div></div>;
   } else {
     const {
       id,

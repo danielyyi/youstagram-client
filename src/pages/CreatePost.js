@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "../util/hooks";
-import {FETCH_POSTS_QUERY} from '../util/graphql'
+import {FETCH_POSTS_QUERY, LOAD_POSTS_QUERY} from '../util/graphql'
 import FileBase from 'react-file-base64'
 
 const pickerStyles = {
@@ -74,11 +74,11 @@ function MakePost(props) {
     variables: values,
     update(proxy, result) {
       const data = proxy.readQuery({
-        query: FETCH_POSTS_QUERY,
+        query: LOAD_POSTS_QUERY,
       });
       if(data){
         proxy.writeQuery({
-          query: FETCH_POSTS_QUERY,
+          query: LOAD_POSTS_QUERY,
           data: {
             getPosts: [result.data.createPost, ...data.getPosts],
           },

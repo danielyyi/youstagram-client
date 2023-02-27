@@ -21,8 +21,9 @@ function Profile() {
       <ProfileHeaderbar/>
       <div className="fake-other-profile-headerbar"></div>
       <div className="current-posts">
+      <div style={{ height: 50 }}></div>
       {loading ? (
-        <h3>Loading...</h3>
+        <div className="loader-holder"><div className="loader"></div></div>
       ) : (
         posts &&
         posts.map((post) => (
@@ -31,8 +32,9 @@ function Profile() {
           </div>
         ))
       )}
+      <div style={{ height: 100 }}></div>
       </div>
-      <div style={{ height: 60 }}></div>
+      
 
       <Navbar />
     </div>
