@@ -7,10 +7,11 @@ import Post from "../components/Post";
 import Navbar from "../components/Navbar";
 function SingleUser(props) {
   const username = props.match.params.username;
-
-  const {loading, data} = useQuery(GET_USER_POSTS, {
+  const limit = 3;
+  const {loading, data, refetch} = useQuery(GET_USER_POSTS, {
     variables: {
-      username
+      username,
+      limit
     }
   });
   var posts = {};
@@ -33,6 +34,11 @@ function SingleUser(props) {
           </div>
         ))
       )}
+      <div>
+      {!loading ? (
+        <div className="post-holder"><button className="create-button" onClick={() => refetch({limit: posts.length+3})}>Load More</button></div>
+      ) : (<></>)}
+    </div>
       <div style={{ height: 120 }}></div>
       </div>
       
@@ -43,8 +49,8 @@ function SingleUser(props) {
 }
 
 const GET_USER_POSTS = gql`
-  query GetPostsByUser($username: String!) {
-    getPostsByUser(username: $username) {
+  query GetPostsByUser($username: String!, $limit: Int!) {
+    getPostsByUser(username: $username, limit: $limit) {
       caption
       color
       commentCount

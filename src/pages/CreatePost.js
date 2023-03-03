@@ -98,18 +98,19 @@ function MakePost(props) {
   return (
     <div>
       <div style={{textAlign: 'center', fontSize: '3vh', paddingTop: '2vh'}}>Create a post</div>
+      <div className="create-form">
       <form onSubmit={onSubmit}>
-        <div className="post-form-holder">
-          <div >
+        <div className="create-post-form-holder">
+          <div style={{display: 'flex', justifyContent: 'center'}}>
             <FileBase
             type = "file"
             multiple={false}
             onDone = {({base64}) => changeImage(base64)}
             />
           </div>
-          <div className="mock-post-holder">
+          <div className="mock-create-post-holder" >
           <MockPost i={image} color = {color}/>
-          <div>
+          <div style={{display: 'flex', justifyContent: 'center'}}>
             <input
             wrap="soft"
               type="text"
@@ -124,10 +125,10 @@ function MakePost(props) {
         </div>
 
         
-          <div>
+          <div style={{display: 'flex', justifyContent: 'center', marginBottom: '20px'}}>
             <CirclePicker  styles = {pickerStyles} color = {color} onChange={({hex}) => changeColor(hex)}/>
           </div>
-
+        <div style={{display: 'flex', justifyContent: 'center'}}>
         <Link to="/profile">
           <button className="create-button">Cancel</button>
         </Link>
@@ -135,7 +136,9 @@ function MakePost(props) {
           Post
         </button>
         </div>
+        </div>
       </form>
+      </div>
     </div>
   );
 }

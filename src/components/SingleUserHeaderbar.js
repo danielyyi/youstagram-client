@@ -18,7 +18,7 @@ function SingleUserHeaderbar({username}) {
         username
       }
     });
-  
+   
     let searchUser;
     if(data){
       searchUser = data.searchUser;

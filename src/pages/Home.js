@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "../components/Navbar";
 import Headerbar from "../components/Headerbar";
 import Post from "../components/Post";
@@ -24,7 +24,7 @@ function Home() {
       nextFetchPolicy: 'cache-first',
     });
 
-
+  
 //---------
    
     console.log(data)
@@ -40,20 +40,20 @@ function Home() {
     <div>
       <Headerbar />
       <div className="fake-headerbar"></div>
-      <div className="current-posts">
+      <div className="current-posts" >
       {loading ? (
         <div className="loader-holder"><div className="loader"></div></div>
       ) : (
         posts &&
         posts.map((post) => (
-          <div className="post-holder" key={post.id}>
+          <div className="post-holder" key={post.id} >
             <Post post={post} />
           </div>
         ))
       )}
     <div>
       {!loading ? (
-        <div className="post-holder"><button onClick={() => refetch({limit: posts.length+3})}>Load More</button></div>
+        <div className="post-holder"><button className="create-button" onClick={() => refetch({limit: posts.length+3})}>Load More</button></div>
       ) : (<></>)}
     </div>
     

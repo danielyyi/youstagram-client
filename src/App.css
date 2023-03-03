@@ -78,11 +78,11 @@ a {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
 }
 .current-posts{
-  height: 100vh;
-  overflow-y: visible;
+  height: 100%;
+  overflow: hidden;
   /*scroll-snap-type: y proximity;*/
 }
 .post-holder {
@@ -93,6 +93,7 @@ a {
   padding-top: 20px;
   padding-bottom: 25px;
   border-bottom: rgba(255, 255, 255, 0.192) solid 1px;
+  overflow: hidden;
 }
 .post-holder:first-child {
   padding-top: 15px;
@@ -318,12 +319,38 @@ a {
     justify-content: center;
     padding-top: 20px;
     padding-bottom: 25px;
+    
+  }
+  .mock-create-post-holder{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 25px;
+  }
+
+  .create-post-form-holder{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 25px;
+  }
+  .create-form{
+    display: flex;
+    justify-content: center;
   }
   .post-form{
     background-color: white;
     border-radius: 10px;
     width: 75%;
     height: 15vh;
+    display: flex;
+    justify-content: center;
   }
 
 .create-button{
@@ -335,6 +362,12 @@ a {
   font-size:15px;
   padding:20px 50px;
   text-decoration:none;
+}
+.create-button:active {
+  position:relative;
+  top:2px;
+  
+  border:2px solid #fdf97c;
 }
 .temp-input{
   width: 200px;
@@ -385,6 +418,16 @@ a {
   width: 50px;
   height: 50px;
   animation: spin 2s linear infinite;
+}
+.user-search-widget{
+  color: white;
+  font-size: 20px;
+}
+
+@font-face {
+  font-family: f;
+  text-rendering: optimizeLegibility;
+  src: url(https://use.fontawesome.com/releases/v5.3.1/css/all.css);
 }
 
 @keyframes spin {

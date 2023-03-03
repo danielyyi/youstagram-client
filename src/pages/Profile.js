@@ -10,11 +10,24 @@ import Post from "../components/Post";
 
 function Profile() {
   const { user, logout } = useContext(AuthContext);
-  const {loading, data} = useQuery(FETCH_POSTS_QUERY);
-  var posts = {};
-  if(!loading){
-    posts = [...data.getPosts.filter((post)=>post.username===user.username)];
-  }
+  const username = user.username
+  const limit = 3;
+  const {loading, data, refetch} = useQuery(GET_USER_POSTS, {
+    variables: {
+      username,
+      limit
+    },
+    fetchPolicy: 'network-only', // Used for first execution
+    nextFetchPolicy: 'cache-first',
+  });
+  var posts = [];
+  if(!loading && data && data.getPostsByUser){
+      data.getPostsByUser.forEach(element => {
+        posts.push(element);
+      });
+      console.log(posts)
+      console.log("pressed");
+    }
 
   return (
     <div className="profile-page">
@@ -32,7 +45,13 @@ function Profile() {
           </div>
         ))
       )}
+      <div>
+      {!loading ? (
+        <div className="post-holder"><button className="create-button" onClick={() => refetch({limit: posts.length+3})}>Load More</button></div>
+      ) : (<></>)}
+    </div>
       <div style={{ height: 100 }}></div>
+      
       </div>
       
 
@@ -40,4 +59,23 @@ function Profile() {
     </div>
   );
 }
+const GET_USER_POSTS = gql`
+  query GetPostsByUser($username: String!, $limit: Int!) {
+    getPostsByUser(username: $username, limit: $limit) {
+      caption
+      color
+      commentCount
+      comments {
+        body
+        createdAt
+        id
+        username
+      }
+      createdAt
+      id
+      image
+      username
+    }
+  }
+`;
 export default Profile;

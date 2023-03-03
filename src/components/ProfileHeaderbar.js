@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-//import pfp from "../pfp.png";
+import pfp from "../pfp.png";
 import { AuthContext } from "../context/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -45,8 +45,9 @@ function ProfileHeaderbar() {
         <div className="profile-name-bio">
           <div className="profile-name">{user.username}</div>
           <div className="profile-bio">{bio}</div>
+          
         </div>
-        
+        <img className="pfp" src={pfp} alt={"logo"} />
       </div>
       <div className="profile-header-buttons">
         <Link to="/createpost">
@@ -59,7 +60,9 @@ function ProfileHeaderbar() {
           <Link to="/">
           <button className="dots-button" onClick={logout}>Logout</button>
           </Link>
+          
         </div>
+        
       </div>
       
     </div>
