@@ -12,6 +12,15 @@ body {
   display: flex;
   justify-content: center;
 }
+.fake-nav{
+  height: 14vh;
+}
+.fake-nav-single-user{
+  height: 22vh;
+}
+.fake-nav-profile{
+  height: 27vh;
+}
 .nav {
   display: flex;
   justify-content: space-around;
@@ -81,8 +90,10 @@ a {
   overflow-y: auto;
 }
 .current-posts{
+  position: fixed;
   height: 100%;
-  overflow: hidden;
+  width: 100%;
+  overflow: auto;
   /*scroll-snap-type: y proximity;*/
 }
 .post-holder {
@@ -246,7 +257,7 @@ a {
     font-size: 27px;
   }
   .profile-bio{
-    max-width: 75%;
+    max-width:200px;
     font-size: 20px;
  
     margin-left: 1px;
@@ -272,7 +283,7 @@ a {
     display:inline-block;
     color:#ffffff;
     font-size:15px;
-    padding:1px 30px;
+    padding:1px 15px;
     text-decoration:none;
   }
   input[type=file]{
@@ -419,11 +430,43 @@ a {
   height: 50px;
   animation: spin 2s linear infinite;
 }
+
+.loader-holder-small{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-top: 5px
+}
+.loader-small {
+  border: 5px solid #f7f7f7; /* Light grey */
+  border-top: 3px solid #f44e12; /* Blue */
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  animation: spin 2s linear infinite;
+}
 .user-search-widget{
   color: white;
   font-size: 20px;
 }
 
+.edit-bio-form{
+
+  background-color: rgb(27, 27, 27);
+
+}
+.edit-bio-input{
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: white;
+  box-sizing: border-box;
+  width: 250px;
+  height: 75px;
+  box-sizing: border-box;
+  resize: none;
+
+}
 @font-face {
   font-family: f;
   text-rendering: optimizeLegibility;

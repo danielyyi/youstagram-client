@@ -97,6 +97,7 @@ function MakePost(props) {
   
   return (
     <div>
+      
       <div style={{textAlign: 'center', fontSize: '3vh', paddingTop: '2vh'}}>Create a post</div>
       <div className="create-form">
       <form onSubmit={onSubmit}>

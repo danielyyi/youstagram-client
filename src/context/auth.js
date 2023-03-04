@@ -1,4 +1,4 @@
-import React, {useReducer, createContext} from 'react'
+import React, {useReducer, createContext, useState} from 'react'
 import jwtDecode from 'jwt-decode'
 
 const initialState = {
@@ -41,13 +41,15 @@ function authReducer(state, action){
 
 function AuthProvider(props){
     const [state, dispatch] = useReducer(authReducer, initialState);
-    
+    const [bio, updateBio] = useState('')
+
     function login(userData){
         localStorage.setItem("jwtToken", userData.token)
         dispatch({
             type: 'LOGIN',
             payload: userData
         })
+        updateBio("")
     }
 
     function logout(){
@@ -56,11 +58,14 @@ function AuthProvider(props){
             type: 'LOGOUT'
         })
         //no payload
+        updateBio("")
     }
+    
+    
 
     return (
         <AuthContext.Provider
-            value = {{ user: state.user, login, logout}}
+            value = {{ user: state.user, login, logout, bio, updateBio}}
             {...props}
             />
     )

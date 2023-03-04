@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { AuthContext } from "../context/auth";
@@ -29,12 +29,26 @@ function Profile() {
       console.log("pressed");
     }
 
+    const listInnerRef = useRef();
+    const onScroll = () => {
+      if (listInnerRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+        console.log("Scroll Top: " + scrollTop, "Scroll Height" + scrollHeight, "Client Height: " + clientHeight)
+        console.log(scrollTop + clientHeight + 100)
+        if (scrollTop + clientHeight +  25>= scrollHeight) {
+          console.log("BOTTOM")
+          refetch({limit: posts.length+3})
+        }
+      }
+    };
+
   return (
     <div className="profile-page">
       <ProfileHeaderbar/>
       <div className="fake-other-profile-headerbar"></div>
-      <div className="current-posts">
       <div style={{ height: 50 }}></div>
+      <div className="current-posts" onScroll={onScroll} ref={listInnerRef}>
+      
       {loading ? (
         <div className="loader-holder"><div className="loader"></div></div>
       ) : (
@@ -46,15 +60,9 @@ function Profile() {
         ))
       )}
       <div>
-      {!loading ? (
-        <div className="post-holder"><button className="create-button" onClick={() => refetch({limit: posts.length+3})}>Load More</button></div>
-      ) : (<></>)}
     </div>
-      <div style={{ height: 100 }}></div>
-      
+      <div className="fake-nav-profile"></div>
       </div>
-      
-
       <Navbar />
     </div>
   );
