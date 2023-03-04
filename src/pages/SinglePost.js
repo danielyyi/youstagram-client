@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../context/auth";
 import DeleteButton from "../components/DeleteButton";
+import Navbar from "../components/Navbar"
 function SinglePost(props) {
   console.log(props);
   const postId = props.match.params.postId;
@@ -62,6 +63,7 @@ function deletePostCallback(){
     console.log(caption);
     console.log(comments);
     postMarkup = (
+      <>
       <div className="current-posts">
         <div className="post-holder">
           <div>
@@ -106,16 +108,21 @@ function deletePostCallback(){
               {user ? (<div>
                       <p>Post a Comment</p>
                       
-                      <input type="text" maxLength="50" size="10" id="commentInput" onChange={event => setComment(event.target.value)}/>
-                      <button disabled={comment.trim() === ''} onClick={submitComment}>Submit</button>
+                      <input type="text" maxLength="50" className="comment-input" size="15" id="commentInput" onChange={event => setComment(event.target.value)}/>
+                      <button className="comment-submit" disabled={comment.trim() === ''} onClick={submitComment}>Submit</button>
                       
                     </div>) : (<div>You must be logged in to comment</div>)}
              
             </div>
         </div>
       </div>
+      <Navbar/>
+      </>
+      
     );
+    
   }
+  
   return postMarkup;
 }
 const SUBMIT_COMMENT_MUTATION = gql`

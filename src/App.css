@@ -448,6 +448,20 @@ a {
 .user-search-widget{
   color: white;
   font-size: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 10px;
+  border-bottom: rgba(255, 255, 255, 0.432) solid 1px;
+  
+}
+.search-bio{
+  margin-left: 10px;
+  color: rgba(255, 255, 255, 0.63);
+}
+.users-holder{
+  padding: 10px;
+  overflow: auto;
+  margin-top:10px;
 }
 
 .edit-bio-form{
@@ -458,6 +472,7 @@ a {
 .edit-bio-input{
   background: transparent;
   border: none;
+  
   font-size: 20px;
   color: white;
   box-sizing: border-box;
@@ -466,6 +481,33 @@ a {
   box-sizing: border-box;
   resize: none;
 
+}
+.comment-input{
+  width: 30vh;
+  height: 3vh;
+  font-size: 20px;
+}
+.comment-submit{
+  width: 10vh;
+  height: 4vh;
+  font-size: 20px;
+}
+.search-search-holder{
+  position: fixed;
+  z-index: 999;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.search-search{
+  width: 100%;
+  padding: 12px 20px;
+ 
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 20px;
 }
 @font-face {
   font-family: f;

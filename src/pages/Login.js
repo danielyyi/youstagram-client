@@ -4,6 +4,8 @@ import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import { useForm } from "../util/hooks";
 import {AuthContext} from '../context/auth'
+import '../Login.css'
+import Navbar from "../components/Navbar";
 
 function Login(props) {
   const context = useContext(AuthContext)
@@ -31,28 +33,38 @@ function Login(props) {
   }
 
   return (
-    <div>
-      <h2>Youstagram</h2>
-      <form onSubmit={onSubmit} noValidate>
+    <>
+    <div className="form-holder">
+      <form onSubmit={onSubmit} noValidate className="form">
+      <div class="title">Youstagram</div>
+      <div class="subtitle">Login</div>
+      <div class="input-container ic1">
         <input
-          label="Username"
-          placeholder="Username..."
+          id="username"
+          placeholder=" "
           name="username"
           value={values.username}
-          className="temp-input"
+          className="input"
           onChange={onChange}
         />
+        <div class="cut"></div>
+        <label for="username" class="placeholder">Username</label>
+        </div>
+        <div class="input-container ic2">
         <input
-          label="Password"
-          placeholder="Password..."
-          className="temp-input"
+         id="password"
+          placeholder=" "
+          className="input"
           name="password"
           value={values.password}
-         
           onChange={onChange}
         />
-        <button className="temp-input" type="submit">Login</button>
-      </form>
+        <div class="cut"></div>
+        <label for="password" class="placeholder">Password</label>
+        </div>
+        {loading ? (<div className="loader-holder-small"><div className="loader-small"></div></div>):(<button className="submit" type="submit">Login</button>)}
+
+      
       {Object.keys(errors).length > 0 && (
         <div>
           <ul>
@@ -63,9 +75,15 @@ function Login(props) {
         </div>
       )}
       <Link to="/noprofile">
-        <div style={{   fontSize:"larger", color: "white" }}>back</div>
+        <div style={{   fontSize:"larger", color: "white", margin:15 }}>Back</div>
       </Link>
+
+      </form>
+      
+      
     </div>
+    <Navbar />
+    </>
   );
 }
 const LOGIN_USER = gql`

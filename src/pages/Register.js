@@ -4,6 +4,8 @@ import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import { useForm } from "../util/hooks";
 import {AuthContext} from '../context/auth'
+import '../Login.css'
+import Navbar from "../components/Navbar";
 
 function Register(props) {
   const context = useContext(AuthContext)
@@ -33,44 +35,62 @@ function Register(props) {
   }
 
   return (
-    <div>
-      <h2>Register Page</h2>
-      <form onSubmit={onSubmit} noValidate>
+    <>
+    <div className="form-holder">
+      <form className="form" onSubmit={onSubmit} noValidate>
+      <div class="title">Youstagram</div>
+      <div class="subtitle">Sign Up</div>
+      <div class="input-container ic1">
         <input
-          label="Username"
-          placeholder="Username..."
+          placeholder=" "
+          id= "username"
           name="username"
           value={values.username}
-          className="temp-input"
+          className="input"
           onChange={onChange}
         />
+        <div class="cut"></div>
+        <label for="username" className="placeholder">Username</label>
+        </div>
+        <div class="input-container ic2">
         <input
-          label="Email"
-          placeholder="Email..."
+          placeholder=" "
+          id="email"
           name="email"
           value={values.email}
-          className="temp-input"
+          className="input"
           onChange={onChange}
         />
+        <div class="cut"></div>
+        <label for="email" className="placeholder">Email</label>
+        </div>
+        <div class="input-container ic2">
         <input
-          label="Password"
-          placeholder="Password..."
+          placeholder=" "
+          id="password"
           name="password"
           value={values.password}
-          className="temp-input"
+          className="input"
           onChange={onChange}
         />
+        <div class="cut"></div>
+        <label for="password" className="placeholder">Password</label>
+        </div>
+        <div class="input-container ic2">
         <input
-          label="Confirm Password"
-          placeholder="Confirm Password..."
+          id="confirmPassword"
+          placeholder=" "
           name="confirmPassword"
           value={values.confirmPassword}
-          className="temp-input"
+          className="input"
           onChange={onChange}
         />
-        <button className="temp-input" type="submit">Register</button>
-      </form>
-      {Object.keys(errors).length > 0 && (
+         <div class="cut"></div>
+        <label for="confirmPassword" className="placeholder">Confirm Password</label>
+        </div>
+        {loading ? (<div className="loader-holder-small"><div className="loader-small"></div></div>):(<button className="submit" type="submit">Sign Up</button>)}
+        
+        {Object.keys(errors).length > 0 && (
         <div>
           <ul>
             {Object.values(errors).map((value) => (
@@ -80,9 +100,14 @@ function Register(props) {
         </div>
       )}
       <Link to="/noprofile">
-        <div style={{  fontSize:"larger",color: "white" }}>back</div>
+        <div style={{  fontSize:"larger",color: "white", margin:15 }}>Back</div>
       </Link>
+      </form>
+      
+      
     </div>
+    <Navbar />
+    </>
   );
 }
 const REGISTER_USER = gql`
