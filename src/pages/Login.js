@@ -62,14 +62,14 @@ function Login(props) {
         <div class="cut"></div>
         <label for="password" class="placeholder">Password</label>
         </div>
-        {loading ? (<div className="loader-holder-small"><div className="loader-small"></div></div>):(<button className="submit" type="submit">Login</button>)}
+        {loading ? (<div className="loader-holder-small"><div className="loader-small" ></div></div>):(<button className="submit" type="submit">Login</button>)}
 
       
       {Object.keys(errors).length > 0 && (
         <div>
           <ul>
             {Object.values(errors).map((value) => (
-              <li key={value}>{value}</li>
+              <li className="errors" key={value}>{value}</li>
             ))}
           </ul>
         </div>

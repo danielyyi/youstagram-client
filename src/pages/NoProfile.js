@@ -5,22 +5,29 @@ import Navbar from "../components/Navbar";
 function NoProfile() {
   return (
     <>
-    <div >
-      <div className="post-form-holder">
-        <h3>You're not logged in...</h3>
-        <Link to="/login">
-          <button className="login">Login</button>
-        </Link>
-      </div>
-      <div className="post-form-holder">
-        <div>Don't have an account?</div>
-        <Link to="/register">
-          <button className="login">Sign Up</button>
-        </Link>
-      </div>
+      <div className="form-holder">
+        <form className="form">
+          <div class="subtitle">You're not logged in...</div>
+
+          <div class="input-container ic1">
+            <Link to="/login">
+              <button className="button">Login</button>
+            </Link>
+            <div class="cut"></div>
+          </div>
+          <div class="input-container ic2">
+          <div class="subtitle-2">Don't have an account?</div>
+            <div class="cut"></div>
+          </div>
+          <div class="input-container ic3">
+            <Link to="/register">
+              <button className="button">Sign Up</button>
+            </Link>
+            <div class="cut"></div>
+          </div>
+        </form>
       </div>
       <Navbar />
-    
     </>
   );
 }

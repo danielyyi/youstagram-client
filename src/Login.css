@@ -25,6 +25,9 @@
   font-weight: 600;
   margin-top: 30px;
 }
+.errors{
+  color: #dc2f55;
+}
 
 .subtitle {
   color: #eee;
@@ -33,6 +36,14 @@
   font-weight: 600;
   margin-top: 10px;
 }
+.subtitle-2 {
+  color: #d7d7d7;
+  font-family: sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
 
 .input-container {
   height: 50px;
@@ -108,8 +119,8 @@
 }
 
 .submit {
-  background: rgb(246,255,0);
-background: linear-gradient(90deg, rgba(246,255,0,1) 0%, rgba(255,58,0,1) 100%);
+  background: rgb(255, 208, 0);
+background: linear-gradient(90deg, rgb(255, 208, 0) 0%, rgba(255,58,0,1) 100%);
   border-radius: 12px;
   border: 0;
   box-sizing: border-box;
@@ -125,4 +136,18 @@ background: linear-gradient(90deg, rgba(246,255,0,1) 0%, rgba(255,58,0,1) 100%);
 
 .submit:active {
   background-color: #06b;
+}
+
+.button {
+  background: rgb(255, 208, 0);
+background: linear-gradient(90deg, rgb(255, 208, 0) 0%, rgba(255,58,0,1) 100%);
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
 }

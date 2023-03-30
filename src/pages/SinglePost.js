@@ -3,17 +3,16 @@ import gql from "graphql-tag";
 import { useMutation, useQuery } from "@apollo/client";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from "@fortawesome/free-solid-svg-icons";
+import { faComments, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../context/auth";
 import DeleteButton from "../components/DeleteButton";
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 function SinglePost(props) {
   console.log(props);
   const postId = props.match.params.postId;
   const { user } = useContext(AuthContext);
 
-  const [ comment, setComment] = useState('')
-
+  const [comment, setComment] = useState("");
 
   console.log(postId);
   //if it works it works...
@@ -29,26 +28,28 @@ function SinglePost(props) {
   }
   //----
   //THE SCREEN REFRESHES WHEN POSTING A COMMENT. THIS CAN BE REMOVED BY NOT WRAPPING IT IN A FORM BUT THEN U CANT USE ENTER BUTTON ON KEYBOARD
-  const[submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
-    
-    update(){
+  const [submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
+    update() {
       setComment("");
       document.getElementById("commentInput").value = "";
     },
     variables: {
       postId,
-      body: comment
-    }
-  })
+      body: comment,
+    },
+  });
 
-function deletePostCallback(){
-  props.history.push('/');
-}
-
+  function deletePostCallback() {
+    props.history.push("/");
+  }
 
   let postMarkup;
   if (!getPost) {
-    postMarkup = <div className="loader-holder"><div className="loader"></div></div>;
+    postMarkup = (
+      <div className="loader-holder">
+        <div className="loader"></div>
+      </div>
+    );
   } else {
     const {
       id,
@@ -62,79 +63,106 @@ function deletePostCallback(){
     } = getPost;
     console.log(caption);
     console.log(comments);
-    postMarkup = (
-      <>
-      <div className="current-posts">
-        <div className="post-holder">
-          <div>
-            <div className="post-user">{username}</div>
-            <div className="post" style={{ backgroundColor: `${color}` }}>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <img className="post-image" src={image} alt={"post"} />
-              </div>
-            </div>
-            <div className="post-caption">{caption}</div>
-            <div className="post-bottom-holder">
-              <div className="post-date">
-                {moment(createdAt).format("MMMM Do, YYYY")} (
-                {moment(createdAt).fromNow()})
-              </div>
-              <div className="spacer"></div>
 
-              <div className="comment-icon">
-                {commentCount} <FontAwesomeIcon icon={faComments} />
+    postMarkup = (
+      <div>
+        <div className="current-posts">
+        <div className="single-post-page">
+          <div className="single-post-holder">
+            <div>
+              <div className="post-user">{username}</div>
+              <div className="post" style={{ backgroundColor: `${color}` }}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <img className="post-image" src={image} alt={"post"} />
+                </div>
               </div>
-              
-              
+              <div className="post-caption">{caption}</div>
+              <div className="post-bottom-holder">
+                <div className="post-date">
+                  {moment(createdAt).format("MMMM Do, YYYY")} (
+                  {moment(createdAt).fromNow()})
+                </div>
+                <div className="spacer"></div>
+
+                <div className="comment-icon">
+                  {commentCount} <FontAwesomeIcon icon={faComments} />
+                </div>
+              </div>
+              {user && user.username === username && (
+                <DeleteButton postId={id} callback={deletePostCallback} />
+              )}
             </div>
-            {user && user.username === username && <DeleteButton postId={id} callback={deletePostCallback}/> }
           </div>
-          
+
           <div className="comment-section">
-            <div className="comment-label">Comments</div>
-            {comments.map(comment => (
+            <div className="comment-area" style={{ borderColor: `${color}` }}>
+              {comments.map((comment) => (
                 <div className="comment-card" key={comment.id}>
-                  <div className="comment-username">{comment.username}:</div>
-                  
-                  <div className="comment-body">{comment.body}</div>
-                  
-                  <div className="comment-date">{moment(comment.createdAt).fromNow()}</div>
-                  {user && (user.username === comment.username || user.username === username)&& (
-                    <DeleteButton postId={id} commentId={comment.id}/>
+                  <div className="comment-bulk">
+                    <div className="comment-username">{comment.username}:</div>
+                    <div className="comment-body">{comment.body}</div>
+                    <div className="comment-date">
+                      {moment(comment.createdAt).fromNow()}
+                    </div>
+                  </div>
+                  <div>
+                  {user && user.username === comment.username && (
+                    <DeleteButton postId={id} commentId={comment.id} />
                   )}
-                  
+                  </div>
                 </div>
               ))}
-              {user ? (<div>
-                      <p>Post a Comment</p>
-                      
-                      <input type="text" maxLength="50" className="comment-input" size="15" id="commentInput" onChange={event => setComment(event.target.value)}/>
-                      <button className="comment-submit" disabled={comment.trim() === ''} onClick={submitComment}>Submit</button>
-                      
-                    </div>) : (<div>You must be logged in to comment</div>)}
-             
             </div>
+            <div className="comment-input-holder">
+              {user ? (
+                <div className="comment-input">
+                  <input
+                    type="text"
+                    maxLength="40"
+                    size="15"
+                    id="commentInput"
+                    placeholder="Comment..."
+                    onChange={(event) => setComment(event.target.value)}
+                  />
+                  <button
+                    className="comment-submit"
+                    disabled={comment.trim() === ""}
+                    onClick={submitComment}
+                  >
+                    <FontAwesomeIcon icon={faPaperPlane} />
+                  </button>
+                </div>
+              ) : (
+                <div style={{ marginTop: 30, fontWeight: "bold" }}>
+                  You must be logged in to comment
+                </div>
+              )}
+            </div>
+          </div>
         </div>
+        <div style={{height:70}}></div>
+        </div>
+       
+        <Navbar />
       </div>
-      <Navbar/>
-      </>
-      
     );
-    
   }
-  
+
   return postMarkup;
 }
 const SUBMIT_COMMENT_MUTATION = gql`
-mutation ($postId: ID!, $body: String!) {
-  createComment(postId: $postId, body: $body) {
-    id
-    comments {
-      id body createdAt username
+  mutation ($postId: ID!, $body: String!) {
+    createComment(postId: $postId, body: $body) {
+      id
+      comments {
+        id
+        body
+        createdAt
+        username
+      }
     }
   }
-}
-`
+`;
 const FETCH_POST_QUERY = gql`
   query ($postId: ID!) {
     getPost(postId: $postId) {

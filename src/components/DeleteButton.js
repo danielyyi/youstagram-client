@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {FETCH_POSTS_QUERY} from '../util/graphql'
 function DeleteButton({ postId, commentId, callback}) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_POST_MUTATION;
-
+  const [deleted, setDeleted] = useState(false);
   const [deletePostOrComment] = useMutation(mutation, {
     update(proxy) {
       setConfirmOpen(false);
@@ -16,9 +16,12 @@ function DeleteButton({ postId, commentId, callback}) {
         const data = proxy.readQuery({
           query: FETCH_POSTS_QUERY
         })
-        data.getPosts = data.getPosts.filter((p) => p.id !== postId)
-        proxy.writeQuery({query: FETCH_POSTS_QUERY, data})
+        if(data && data.getPosts){
+          data.getPosts = data.getPosts.filter((p) => p.id !== postId)
+          proxy.writeQuery({query: FETCH_POSTS_QUERY, data})
+        }
         */
+       setDeleted(true);
        console.log("POST DELETED")
       }
 
@@ -31,16 +34,16 @@ function DeleteButton({ postId, commentId, callback}) {
   });
 
   return (
-    <div className="delete-icon">
-      <button onClick={() => setConfirmOpen(true)}>
-        <FontAwesomeIcon icon={faTrash} />
-        
-      </button>
+    <div className="delete-icon" >
+      {deleted ? (<div>Post has been deleted.</div>) : (<button className="delete-buttons" onClick={() => setConfirmOpen(true)}>
+        <FontAwesomeIcon  icon={faTrash} />
+      </button>)}
+      
       {confirmOpen ? (
-          <div>
-            <div><button onClick={() => setConfirmOpen(false)}>Cancel</button></div>
-            <div><button onClick={deletePostOrComment}>Confirm</button></div>
-          </div>
+          <>
+            <div ><button className="delete-buttons"onClick={() => setConfirmOpen(false)}>Cancel</button></div>
+            <div><button className="delete-buttons" onClick={deletePostOrComment}>Delete</button></div>
+          </>
         ) : null}
     </div>
   );

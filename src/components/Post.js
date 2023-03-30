@@ -11,7 +11,7 @@ import {AuthContext} from '../context/auth'
 function Post({ post: { caption, image, color, createdAt, id, username, commentCount } }) {
 
   const {user} = useContext(AuthContext);
-
+  const date = moment(createdAt).fromNow();
 
   moment.updateLocale('en', {
     relativeTime : {
@@ -37,10 +37,11 @@ function Post({ post: { caption, image, color, createdAt, id, username, commentC
       <Link to={`/posts/${id}`}>
       <div className="post-caption">{caption}</div>
       <div className="post-bottom-holder">
-        <div className="post-date">{moment(createdAt).format('MMMM Do, YYYY')} ({moment(createdAt).fromNow()})</div>
+      
+        <div className="post-date">{date.charAt(0).toUpperCase() + date.slice(1)} ({moment(createdAt).format('MMM Do, YYYY')}) </div>
         <div className="spacer"></div>  
         
-        <div className="comment-icon">{commentCount} <FontAwesomeIcon icon={faComments}/></div>
+        <div className="comment-icon">{commentCount} <FontAwesomeIcon icon={faComments}  style={{fontSize:'24px'}}/></div>
         
     </div>
     </Link>

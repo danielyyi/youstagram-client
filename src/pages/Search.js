@@ -7,50 +7,70 @@ import { Link } from "react-router-dom";
 import pfp from "../pfp.png";
 function Search() {
   const { loading, data } = useQuery(FETCH_USERS_QUERY);
-  const [term, newTerm] = useState("")
+  const [term, newTerm] = useState("");
   var users = [];
   if (!loading) {
     users = data.getUsers;
   }
   
+
   return (
-    <div>
+    <div >
       {loading ? (
-        <h3>Loading...</h3>
+        <div className="loader-holder"><div className="loader"></div></div>
       ) : (
-        <div>
-        <div className="search-search-holder">
-          <input type="text" placeholder="Search..." className="search-search" onChange={(e) => newTerm(e.target.value)}></input>
-        </div>
-        <div className="users-holder">
-          <div style={{height:65}}></div>
-          {users.map((user) => (
-            <div>
-            {(user.username.toLowerCase().indexOf(term.toLowerCase()) != -1) ? (<Link to={`/users/${user.username}`}>
-            <div key={user.id} className="user-search-widget">
-              <img
-                className="pfp"
-                style={{ width: 40, height: 40 }}
-                src={pfp}
-                alt={"logo"}
-              />
-              <div className="search-bio">{user.bio ? (<>"{user.bio.length>21? (<>{user.bio.substring(0,20)}..."</>) : (<>"{user.bio}"</>)}</>):(<></>)}</div>
-              <div>{user.username}</div>
-              
-              
+        <div className="search-page">
+          <div className="search-search-holder">
+            <div className="search-search">
+              <input
+                type="text"
+                placeholder="Search..."
+                onChange={(e) => newTerm(e.target.value)}
+              ></input>
             </div>
-          </Link>) :(<></>)}
-            </div>
-          ))}
-        </div>
+          </div>
+          <div className="users-holder">
+            <div style={{ height: 65 }}></div>
+            {users.map((user) => (
+              <div>
+                {user.username.toLowerCase().indexOf(term.toLowerCase()) !=
+                -1 ? (
+                  <Link to={`/users/${user.username}`}>
+                    <div key={user.id} className="user-search-widget">
+                      <img
+                        className="pfp"
+                        style={{ width: 40, height: 40 }}
+                        src={pfp}
+                        alt={"logo"}
+                      />
+                      <div className="search-bio">
+                        {user.bio ? (
+                          <>
+                            "
+                            {user.bio.length > 16 ? (
+                              <>{user.bio.substring(0, 15)}..."</>
+                            ) : (
+                              <>"{user.bio}"</>
+                            )}
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                      <div>{user.username}</div>
+                    </div>
+                  </Link>
+                ) : (
+                  <></>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
       <Navbar />
-      
     </div>
-    
   );
-  
 }
 /*
 const SEARCH_USER = gql`

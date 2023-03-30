@@ -94,7 +94,7 @@ function Register(props) {
         <div>
           <ul>
             {Object.values(errors).map((value) => (
-              <li key={value}>{value}</li>
+              <li className="errors" key={value}>{value}</li>
             ))}
           </ul>
         </div>

@@ -26,9 +26,9 @@ function Home() {
     const onScroll = () => {
       if (listInnerRef.current) {
         const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-        console.log("Scroll Top: " + scrollTop, "Scroll Height" + scrollHeight, "Client Height: " + clientHeight)
-        console.log(scrollTop + clientHeight + 100)
-        if (scrollTop + clientHeight +  25>= scrollHeight) {
+        //console.log("Scroll Top: " + scrollTop, "Scroll Height" + scrollHeight, "Client Height: " + clientHeight)
+        //console.log(scrollTop + clientHeight + 100)
+        if (scrollTop + clientHeight +  800>= scrollHeight) {
           console.log("BOTTOM")
           refetch({limit: posts.length+3})
         }
