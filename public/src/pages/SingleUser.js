@@ -1,35 +1,25 @@
 import React, { useContext, useRef } from "react";
-import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import { AuthContext } from "../context/auth";
-import ProfileHeaderbar from "../components/ProfileHeaderbar";
-import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
+import SingleUserHeaderbar from "../components/SingleUserHeaderbar";
+import { useQuery } from "@apollo/client";
 import {FETCH_POSTS_QUERY} from '../util/graphql'
 import Post from "../components/Post";
-
-function Profile() {
-  const { user, logout } = useContext(AuthContext);
-  const username = user.username
+import Navbar from "../components/Navbar";
+function SingleUser(props) {
+  const username = props.match.params.username;
   const limit = 3;
   const {loading, data, refetch} = useQuery(GET_USER_POSTS, {
     variables: {
       username,
       limit
-    },
-    fetchPolicy: 'network-only', // Used for first execution
-    nextFetchPolicy: 'cache-first',
-  });
-  var posts = [];
-  if(!loading && data && data.getPostsByUser){
-      data.getPostsByUser.forEach(element => {
-        posts.push(element);
-      });
-      console.log(posts)
-      console.log("pressed");
     }
+  });
+  var posts = {};
+  if(!loading){
+    posts = data.getPostsByUser;
+  }
 
-    const listInnerRef = useRef();
+  const listInnerRef = useRef();
     const onScroll = () => {
       if (listInnerRef.current) {
         const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
@@ -41,14 +31,12 @@ function Profile() {
         }
       }
     };
-
+  
   return (
-    <div className="profile-page">
-      <ProfileHeaderbar/>
+    <div>
+      <SingleUserHeaderbar username={username}/>
       <div className="fake-other-profile-headerbar"></div>
-      <div style={{ height: 55 }}></div>
       <div className="current-posts" onScroll={onScroll} ref={listInnerRef}>
-      
       {loading ? (
         <div className="loader-holder"><div className="loader"></div></div>
       ) : (
@@ -61,12 +49,15 @@ function Profile() {
       )}
       <div>
     </div>
-      <div className="fake-nav-profile"></div>
+      <div className="fake-nav-single-user"></div>
       </div>
+      
+
       <Navbar />
     </div>
   );
 }
+
 const GET_USER_POSTS = gql`
   query GetPostsByUser($username: String!, $limit: Int!) {
     getPostsByUser(username: $username, limit: $limit) {
@@ -86,4 +77,4 @@ const GET_USER_POSTS = gql`
     }
   }
 `;
-export default Profile;
+export default SingleUser;
