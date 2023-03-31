@@ -143,6 +143,7 @@ a {
   background-color: rgb(32, 32, 32);
   border: none;
   color: white;
+  word-break: break-all;
   width: 350px;
   font-size: 23px;
   position: relative;
@@ -186,7 +187,6 @@ a {
     justify-content: center;
 }
 .fake-post-image input[type=file]{
-
   font-size: larger;
   font-weight: bold;
   color: transparent;

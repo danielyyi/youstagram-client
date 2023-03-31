@@ -130,6 +130,7 @@ function MakePost(props) {
                   <input
                     wrap="soft"
                     type="text"
+                    maxLength={100}
                     onChange={onChange}
                     value={values.caption}
                     className="post-caption"
