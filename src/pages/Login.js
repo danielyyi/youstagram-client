@@ -53,6 +53,7 @@ function Login(props) {
         <div class="input-container ic2">
         <input
          id="password"
+         type="password"
           placeholder=" "
           className="input"
           name="password"

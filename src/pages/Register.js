@@ -67,6 +67,7 @@ function Register(props) {
         <div class="input-container ic2">
         <input
           placeholder=" "
+          type="password"
           id="password"
           name="password"
           value={values.password}
@@ -78,6 +79,7 @@ function Register(props) {
         </div>
         <div class="input-container ic2">
         <input
+        type="password"
           id="confirmPassword"
           placeholder=" "
           name="confirmPassword"
