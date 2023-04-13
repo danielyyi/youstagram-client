@@ -88,7 +88,7 @@ function SinglePost(props) {
                   {commentCount} <FontAwesomeIcon icon={faComments} />
                 </div>
               </div>
-              {user && user.username === username && (
+              {user && (user.username === username || user.username == "Admin") && (
                 <DeleteButton postId={id} callback={deletePostCallback} />
               )}
             </div>

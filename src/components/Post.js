@@ -45,7 +45,7 @@ function Post({ post: { caption, image, color, createdAt, id, username, commentC
         
     </div>
     </Link>
-    {user && user.username === username && <DeleteButton postId={id}/> }
+    {user && (user.username === username || user.username == "Admin") && <DeleteButton postId={id}/> }
     </div>
   );
 }
